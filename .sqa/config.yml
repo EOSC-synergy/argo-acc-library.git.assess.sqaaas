@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/ARGOeu/argo-acc-library:
+      branch: main
+      repo: https://github.com/ARGOeu/argo-acc-library.git
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ARGOeu/argo-acc-library git:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-charcoal-molly.sh
+        container: qc.acc_surly-blue-scorpion
+  QC.Doc:
+    repos:
+      github.com/ARGOeu/argo-acc-library find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-lime-badger.sh
+        container: qc.doc_muggy-rust-badger
+      github.com/ARGOeu/argo-acc-library git:
+        commands:
+        - /usr/bin/env sh .sqa/script.grumpy-seashell-pinscher.sh
+        container: qc.doc_greasy-burgundy-affenpinscher
+      github.com/ARGOeu/argo-acc-library markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-razzmatazz-goat.sh
+        container: qc.doc_squeaky-crimson-booby
+  QC.Lic:
+    repos:
+      github.com/ARGOeu/argo-acc-library licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-persimmon-dogfish.sh
+        container: qc.lic_lanky-lavender-vulture
+  QC.Sec:
+    repos:
+      github.com/ARGOeu/argo-acc-library bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-magnolia-iguana.sh
+        container: qc.sec_chummy-rust-donkey
+  QC.Sty:
+    repos:
+      github.com/ARGOeu/argo-acc-library flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-black-bear.sh
+        container: qc.sty_sleazy-gold-dragon
+  QC.Uni:
+    repos:
+      github.com/ARGOeu/argo-acc-library pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-taupe-monster.sh
+        container: qc.uni_queasy-amethyst-beaver
+  QC.Ver:
+    repos:
+      github.com/ARGOeu/argo-acc-library get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.grumpy-mustard-coati.sh
+        container: qc.ver_zippy-eggplant-bombay
+timeout: 5400
